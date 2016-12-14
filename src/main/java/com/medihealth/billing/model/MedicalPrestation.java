@@ -16,6 +16,9 @@ public class MedicalPrestation extends AbstractMedicalPrestation {
 		return getDiscountCost(patientAge, false, false);
 	}
 
+	/**
+	 * Use custom calculation based on patient benefits
+	 */
 	@Override
 	public double getDiscountCost(int patientAge, boolean hasInsurance, boolean isBloodTest) {
 
