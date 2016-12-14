@@ -3,11 +3,7 @@ package com.medihealth.billing.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class MedicalPrestation {
-
-	private int id;
-	private String name;
-	private double cost;
+public class MedicalPrestation extends AbstractMedicalPrestation {
 
 	public MedicalPrestation(int id, String name, double cost) {
 		this.id = id;
@@ -15,30 +11,12 @@ public class MedicalPrestation {
 		this.cost = cost;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
+	@Override
 	public double getDiscountCost(int patientAge) {
 		return getDiscountCost(patientAge, false, false);
 	}
 
+	@Override
 	public double getDiscountCost(int patientAge, boolean hasInsurance, boolean isBloodTest) {
 
 		double discount = cost;
