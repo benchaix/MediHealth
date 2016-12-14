@@ -22,4 +22,14 @@ public class PatientTest {
 	public void whenGettingPatient1FullName() {
 		Assert.assertEquals(PATIENT_FIRST_NAME + " " + PATIENT_LAST_NAME, patient.getFullName());
 	}
+
+	@Test
+	public void whenGettingPatient1Age() {
+		Assert.assertEquals(PATIENT_AGE, patient.getAge());
+	}
+
+	@Test
+	public void whenGettingPatient1Insurance() {
+		Assert.assertEquals(PATIENT_HAS_INSURANCE, patient.hasMedihealthInsurance());
+	}
 }
