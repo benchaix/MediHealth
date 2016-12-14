@@ -94,4 +94,12 @@ public class BillingServiceTest {
 		Assert.assertEquals(41.04, result, 0);
 	}
 
+	@Test
+	public void whenComputingBillForChildrenUnder5WithBloodTestVaccineAndTwoVaccinesAndInsurance() {
+		double result = billingService.computeBill(2);
+		// 40% + 15% discount on BloodTest (78£) = 35.1
+		// 40% on Vaccine (27.5£) = 16.5
+		// +2 Vaccines (2x 15£)
+		Assert.assertEquals(81.6, result, 0);
+	}
 }
