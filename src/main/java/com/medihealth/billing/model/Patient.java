@@ -1,7 +1,7 @@
 package com.medihealth.billing.model;
 
 public class Patient {
-	private long id;
+	private Long id;
 	private String firstName;
 	private String lastName;
 	private int age;
@@ -17,10 +17,6 @@ public class Patient {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public boolean isMedihealthInsurance() {

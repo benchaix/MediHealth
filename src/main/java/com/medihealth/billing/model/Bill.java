@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Bill {
 
-	private long id;
+	private Long id;
 	private Patient patient;
 	private List<Integer> receivedServices;
 	private int vaccineNumber = 0;

@@ -15,10 +15,6 @@ public class MedicalService {
 		this.cost = cost;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getId() {
 		return id;
 	}
