@@ -7,15 +7,19 @@ import org.junit.Test;
 public class PatientTest {
 	private Patient patient;
 
-	public static final long PATIENT_ID = 1;
-	public static final String PATIENT_FIRST_NAME = "Connor";
-	public static final String PATIENT_LAST_NAME = "MacLeod";
-	public static final int PATIENT_AGE = 498;
-	public static final boolean PATIENT_HAS_INSURANCE = false;
+	static final long PATIENT_ID = 1;
+	static final String PATIENT_FIRST_NAME = "Connor";
+	static final String PATIENT_LAST_NAME = "MacLeod";
+	static final int PATIENT_AGE = 498;
+	static final boolean PATIENT_HAS_INSURANCE = false;
+
+	public static Patient createDefaultPatient() {
+		return new Patient(PATIENT_ID, PATIENT_FIRST_NAME, PATIENT_LAST_NAME, PATIENT_AGE, PATIENT_HAS_INSURANCE);
+	}
 
 	@Before
 	public void setUp() throws Exception {
-		patient = new Patient(PATIENT_ID, PATIENT_FIRST_NAME, PATIENT_LAST_NAME, PATIENT_AGE, PATIENT_HAS_INSURANCE);
+		patient = createDefaultPatient();
 	}
 
 	@Test

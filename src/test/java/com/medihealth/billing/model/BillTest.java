@@ -16,8 +16,7 @@ public class BillTest {
 	@Before
 	public void setUp() throws Exception {
 		// create a new patient
-		Patient patient = new Patient(PatientTest.PATIENT_ID, PatientTest.PATIENT_FIRST_NAME,
-				PatientTest.PATIENT_LAST_NAME, PatientTest.PATIENT_AGE, PatientTest.PATIENT_HAS_INSURANCE);
+		Patient patient = PatientTest.createDefaultPatient();
 
 		// create a list of received services
 		List<Integer> receivedServices = new ArrayList<>();
