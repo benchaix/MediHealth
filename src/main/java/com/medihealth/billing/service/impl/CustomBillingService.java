@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.medihealth.billing.model.Bill;
 import com.medihealth.billing.model.MedicalService;
+import com.medihealth.billing.model.Patient;
 import com.medihealth.billing.service.BillingService;
 
 public class CustomBillingService implements BillingService {
@@ -68,6 +69,32 @@ public class CustomBillingService implements BillingService {
 
 	@Override
 	public double computeBill(long billId) {
-		return 0;
+		Bill bill = getBill(billId);
+		Patient patient = bill.getPatient();
+
+		double totalCost = 0;
+
+		for (int serviceId : bill.getReceivedServices()) {
+			MedicalService medicalService = getMedicalServiceById(serviceId);
+			boolean isBloodTest = medicalService.getId() == 3;
+			totalCost += medicalService.getDiscountCost(patient.getAge(), patient.hasMedihealthInsurance(),
+					isBloodTest);
+		}
+
+		if (bill.getVaccineNumber() > 0) {
+			totalCost += bill.getVaccineNumber() * 15.0;
+		}
+
+		return totalCost;
+	}
+
+	private MedicalService getMedicalServiceById(int id) {
+		for (MedicalService medicalService : medicalServices) {
+			if (medicalService.getId() == id) {
+				return medicalService;
+			}
+		}
+
+		return null;
 	}
 }
