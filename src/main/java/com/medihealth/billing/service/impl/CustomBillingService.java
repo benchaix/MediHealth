@@ -8,6 +8,9 @@ import com.medihealth.billing.model.MedicalService;
 import com.medihealth.billing.model.Patient;
 import com.medihealth.billing.service.BillingService;
 
+/**
+ * Custom implementation of BillingService
+ */
 public class CustomBillingService implements BillingService {
 
 	private List<Bill> bills = new ArrayList<>();
