@@ -3,13 +3,13 @@ package com.medihealth.billing.service;
 import java.util.List;
 
 import com.medihealth.billing.model.Bill;
-import com.medihealth.billing.model.MedicalService;
+import com.medihealth.billing.model.MedicalPrestation;
 
 public interface BillingService {
 
-	void initialize(List<MedicalService> medicalServices, double vaccineCost);
+	void initialize(List<MedicalPrestation> medicalPrestations, double vaccineCost);
 
-	List<MedicalService> getMedicalServices();
+	List<MedicalPrestation> getMedicalPrestations();
 
 	double getVaccineCost();
 

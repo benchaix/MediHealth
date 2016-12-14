@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.medihealth.billing.model.Bill;
-import com.medihealth.billing.model.MedicalService;
+import com.medihealth.billing.model.MedicalPrestation;
 import com.medihealth.billing.model.Patient;
 import com.medihealth.billing.service.BillingService;
 
@@ -14,18 +14,18 @@ import com.medihealth.billing.service.BillingService;
 public class CustomBillingService implements BillingService {
 
 	private List<Bill> bills = new ArrayList<>();
-	private List<MedicalService> medicalServices = new ArrayList<>();
+	private List<MedicalPrestation> medicalPrestations = new ArrayList<>();
 	private double vaccineCost = 0.0;
 
 	@Override
-	public void initialize(List<MedicalService> medicalServices, double vaccineCost) {
-		this.medicalServices = medicalServices;
+	public void initialize(List<MedicalPrestation> medicalPrestations, double vaccineCost) {
+		this.medicalPrestations = medicalPrestations;
 		this.vaccineCost = vaccineCost;
 	}
 
 	@Override
-	public List<MedicalService> getMedicalServices() {
-		return medicalServices;
+	public List<MedicalPrestation> getMedicalPrestations() {
+		return medicalPrestations;
 	}
 
 	@Override
@@ -78,9 +78,9 @@ public class CustomBillingService implements BillingService {
 		double totalCost = 0;
 
 		for (int serviceId : bill.getReceivedServices()) {
-			MedicalService medicalService = getMedicalServiceById(serviceId);
-			boolean isBloodTest = medicalService.getId() == 3;
-			totalCost += medicalService.getDiscountCost(patient.getAge(), patient.hasMedihealthInsurance(),
+			MedicalPrestation medicalPrestation = getMedicalPrestationById(serviceId);
+			boolean isBloodTest = medicalPrestation.getId() == 3;
+			totalCost += medicalPrestation.getDiscountCost(patient.getAge(), patient.hasMedihealthInsurance(),
 					isBloodTest);
 		}
 
@@ -91,10 +91,10 @@ public class CustomBillingService implements BillingService {
 		return totalCost;
 	}
 
-	private MedicalService getMedicalServiceById(int id) {
-		for (MedicalService medicalService : medicalServices) {
-			if (medicalService.getId() == id) {
-				return medicalService;
+	private MedicalPrestation getMedicalPrestationById(int id) {
+		for (MedicalPrestation medicalPrestation : medicalPrestations) {
+			if (medicalPrestation.getId() == id) {
+				return medicalPrestation;
 			}
 		}
 

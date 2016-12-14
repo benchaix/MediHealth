@@ -3,13 +3,13 @@ package com.medihealth.billing.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class MedicalService {
+public class MedicalPrestation {
 
 	private int id;
 	private String name;
 	private double cost;
 
-	public MedicalService(int id, String name, double cost) {
+	public MedicalPrestation(int id, String name, double cost) {
 		this.id = id;
 		this.name = name;
 		this.cost = cost;

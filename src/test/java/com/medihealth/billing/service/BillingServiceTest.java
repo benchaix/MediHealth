@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.medihealth.billing.model.Bill;
-import com.medihealth.billing.model.MedicalService;
+import com.medihealth.billing.model.MedicalPrestation;
 import com.medihealth.billing.model.Patient;
 import com.medihealth.billing.service.impl.CustomBillingService;
 
@@ -24,14 +24,14 @@ public class BillingServiceTest {
 		billingService = new CustomBillingService();
 
 		// populate medical services list with data sample
-		List<MedicalService> medicalServices = new ArrayList<>();
-		medicalServices.add(new MedicalService(1, "Diagnosis", 60.0));
-		medicalServices.add(new MedicalService(2, "X-Ray", 150.0));
-		medicalServices.add(new MedicalService(3, "Blood Test", 78.0));
-		medicalServices.add(new MedicalService(4, "ECG", 200.40));
-		medicalServices.add(new MedicalService(5, "Vaccine", 27.50));
+		List<MedicalPrestation> medicalPrestations = new ArrayList<>();
+		medicalPrestations.add(new MedicalPrestation(1, "Diagnosis", 60.0));
+		medicalPrestations.add(new MedicalPrestation(2, "X-Ray", 150.0));
+		medicalPrestations.add(new MedicalPrestation(3, "Blood Test", 78.0));
+		medicalPrestations.add(new MedicalPrestation(4, "ECG", 200.40));
+		medicalPrestations.add(new MedicalPrestation(5, "Vaccine", 27.50));
 
-		billingService.initialize(medicalServices, vaccineCost);
+		billingService.initialize(medicalPrestations, vaccineCost);
 
 		// prepare fake patient
 		Patient patient1 = new Patient(1, "Connor", "MacLeod", 498, false);
@@ -66,8 +66,8 @@ public class BillingServiceTest {
 	}
 
 	@Test
-	public void whenRetrievingMedicalServices() {
-		int size = billingService.getMedicalServices().size();
+	public void whenRetrievingMedicalPrestations() {
+		int size = billingService.getMedicalPrestations().size();
 		Assert.assertEquals(size, 5);
 	}
 
