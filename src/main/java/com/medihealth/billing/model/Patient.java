@@ -19,14 +19,6 @@ public class Patient {
 		return id;
 	}
 
-	public boolean isMedihealthInsurance() {
-		return medihealthInsurance;
-	}
-
-	public void setMedihealthInsurance(boolean medihealthInsurance) {
-		this.medihealthInsurance = medihealthInsurance;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
@@ -57,5 +49,9 @@ public class Patient {
 
 	public boolean hasMedihealthInsurance() {
 		return medihealthInsurance;
+	}
+
+	public void setMedihealthInsurance(boolean medihealthInsurance) {
+		this.medihealthInsurance = medihealthInsurance;
 	}
 }

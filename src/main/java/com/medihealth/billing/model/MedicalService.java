@@ -3,9 +3,9 @@ package com.medihealth.billing.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class MedicalPrestation extends AbstractMedicalPrestation {
+public class MedicalService extends AbstractMedicalService {
 
-	public MedicalPrestation(int id, String name, double cost) {
+	public MedicalService(int id, String name, double cost) {
 		this.id = id;
 		this.name = name;
 		this.cost = cost;

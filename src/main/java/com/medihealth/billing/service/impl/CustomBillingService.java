@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.medihealth.billing.model.Bill;
-import com.medihealth.billing.model.MedicalPrestation;
+import com.medihealth.billing.model.MedicalService;
 import com.medihealth.billing.model.Patient;
 import com.medihealth.billing.service.BillingService;
 
@@ -14,18 +14,26 @@ import com.medihealth.billing.service.BillingService;
 public class CustomBillingService implements BillingService {
 
 	private List<Bill> bills = new ArrayList<>();
-	private List<MedicalPrestation> medicalPrestations = new ArrayList<>();
-	private double vaccineCost = 0.0;
+	private List<MedicalService> medicalServices = new ArrayList<>();
+	private double vaccineCost = 15.0;
 
-	@Override
-	public void initialize(List<MedicalPrestation> medicalPrestations, double vaccineCost) {
-		this.medicalPrestations = medicalPrestations;
-		this.vaccineCost = vaccineCost;
+	public CustomBillingService() {
+		initialize();
 	}
 
 	@Override
-	public List<MedicalPrestation> getMedicalPrestations() {
-		return medicalPrestations;
+	public void initialize() {
+		medicalServices = new ArrayList<>();
+		medicalServices.add(new MedicalService(1, "Diagnosis", 60.0));
+		medicalServices.add(new MedicalService(2, "X-Ray", 150.0));
+		medicalServices.add(new MedicalService(3, "Blood Test", 78.0));
+		medicalServices.add(new MedicalService(4, "ECG", 200.40));
+		medicalServices.add(new MedicalService(5, "Vaccine", 27.50));
+	}
+
+	@Override
+	public List<MedicalService> getMedicalServices() {
+		return medicalServices;
 	}
 
 	@Override
@@ -78,9 +86,14 @@ public class CustomBillingService implements BillingService {
 		double totalCost = 0;
 
 		for (int serviceId : bill.getReceivedServices()) {
-			MedicalPrestation medicalPrestation = getMedicalPrestationById(serviceId);
-			boolean isBloodTest = medicalPrestation.getId() == 3;
-			totalCost += medicalPrestation.getDiscountCost(patient.getAge(), patient.hasMedihealthInsurance(),
+			MedicalService medicalService = getMedicalServiceById(serviceId);
+
+			if (medicalService == null) {
+				throw new NullPointerException("medicalService is null");
+			}
+
+			boolean isBloodTest = medicalService.getId() == 3;
+			totalCost += medicalService.getDiscountCost(patient.getAge(), patient.hasMedihealthInsurance(),
 					isBloodTest);
 		}
 
@@ -91,10 +104,10 @@ public class CustomBillingService implements BillingService {
 		return totalCost;
 	}
 
-	private MedicalPrestation getMedicalPrestationById(int id) {
-		for (MedicalPrestation medicalPrestation : medicalPrestations) {
-			if (medicalPrestation.getId() == id) {
-				return medicalPrestation;
+	private MedicalService getMedicalServiceById(int id) {
+		for (MedicalService medicalService : medicalServices) {
+			if (medicalService.getId() == id) {
+				return medicalService;
 			}
 		}
 

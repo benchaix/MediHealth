@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.medihealth.billing.model.Bill;
-import com.medihealth.billing.model.MedicalPrestation;
 import com.medihealth.billing.model.Patient;
 import com.medihealth.billing.service.impl.CustomBillingService;
 
@@ -16,65 +15,61 @@ public class BillingServiceTest {
 
 	private BillingService billingService;
 
-	double vaccineCost = 15.0;
+	public enum ServiceEnum {
+		DIAGNOSIS(1), XRAY(2), BLOODTEST(3), ECG(4), VACCINE(5);
+
+		final int id;
+
+		ServiceEnum(int id) {
+			this.id = id;
+		}
+	}
 
 	@Before
 	public void setUp() throws Exception {
 		// test our custom billing service
 		billingService = new CustomBillingService();
 
-		// populate medical services list with data sample
-		List<MedicalPrestation> medicalPrestations = new ArrayList<>();
-		medicalPrestations.add(new MedicalPrestation(1, "Diagnosis", 60.0));
-		medicalPrestations.add(new MedicalPrestation(2, "X-Ray", 150.0));
-		medicalPrestations.add(new MedicalPrestation(3, "Blood Test", 78.0));
-		medicalPrestations.add(new MedicalPrestation(4, "ECG", 200.40));
-		medicalPrestations.add(new MedicalPrestation(5, "Vaccine", 27.50));
-
-		billingService.initialize(medicalPrestations, vaccineCost);
-
 		// prepare fake patient
 		Patient patient1 = new Patient(1, "Connor", "MacLeod", 498, false);
 		Patient patient2 = new Patient(2, "Benjamin", "Button", 4, true);
 		Patient patient3 = new Patient(3, "Leon", "Reno", 68, false);
 
-		// prepare received services
-		List<Integer> receivedServices1 = new ArrayList<>();
-		receivedServices1.add(1); // Diagnosis
-		receivedServices1.add(2); // X-RAY
-		receivedServices1.add(4); // ECG
+		// prepare fake services
+		List<Integer> services1 = new ArrayList<>();
+		services1.add(ServiceEnum.DIAGNOSIS.id);
+		services1.add(ServiceEnum.XRAY.id);
+		services1.add(ServiceEnum.ECG.id);
 
-		// prepare received services
-		List<Integer> receivedServices2 = new ArrayList<>();
-		receivedServices2.add(3); // Blood Test
-		receivedServices2.add(5); // Vaccine
+		List<Integer> services2 = new ArrayList<>();
+		services2.add(ServiceEnum.BLOODTEST.id);
+		services2.add(ServiceEnum.VACCINE.id);
 
-		// prepare received services
-		List<Integer> receivedServices3 = new ArrayList<>();
-		receivedServices3.add(3); // Blood Test
-		receivedServices3.add(4); // ECG
+		List<Integer> services3 = new ArrayList<>();
+		services3.add(ServiceEnum.BLOODTEST.id);
+		services3.add(ServiceEnum.ECG.id);
 
 		// add the bills
-		Bill bill1 = new Bill(1, patient1, receivedServices1, 0);
+		Bill bill1 = new Bill(1, patient1, services1, 0);
 		billingService.addBill(bill1);
 
-		Bill bill2 = new Bill(2, patient2, receivedServices2, 2);
+		Bill bill2 = new Bill(2, patient2, services2, 2);
 		billingService.addBill(bill2);
 
-		Bill bill3 = new Bill(3, patient3, receivedServices3, 1);
+		Bill bill3 = new Bill(3, patient3, services3, 1);
 		billingService.addBill(bill3);
 	}
 
 	@Test
-	public void whenRetrievingMedicalPrestations() {
-		int size = billingService.getMedicalPrestations().size();
+	public void whenRetrievingMedicalServices() {
+		int size = billingService.getMedicalServices().size();
 		Assert.assertEquals(size, 5);
 	}
 
 	@Test
 	public void whenRetrievingVaccineCost() {
 		double result = billingService.getVaccineCost();
-		Assert.assertEquals(vaccineCost, result, 0);
+		Assert.assertEquals(15.0, result, 0);
 	}
 
 	@Test

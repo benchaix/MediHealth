@@ -1,9 +1,9 @@
 package com.medihealth.billing.model;
 
 /**
- * AbstractMedicalPrestation to extends to implements new type of calculation
+ * AbstractMedicalService to extend to implement new type of calculation
  */
-public abstract class AbstractMedicalPrestation {
+public abstract class AbstractMedicalService {
 
 	protected int id;
 	protected String name;
