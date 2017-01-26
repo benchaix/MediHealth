@@ -7,21 +7,21 @@ import com.medihealth.billing.model.MedicalService;
 
 public interface BillingService {
 
-	void initialize();
+  void initialize();
 
-	List<MedicalService> getMedicalServices();
+  List<MedicalService> getMedicalServices();
 
-	double getVaccineCost();
+  double getVaccineCost();
 
-	List<Bill> getBills();
+  List<Bill> getBills();
 
-	void addBill(Bill bill);
+  void addBill(Bill bill);
 
-	void updateBill(Bill bill);
+  void updateBill(Bill bill);
 
-	Bill getBill(long billId);
+  Bill getBill(long billId);
 
-	void removeBill(long billId);
+  void removeBill(long billId);
 
-	double computeBill(long billId);
+  double computeBill(long billId);
 }
